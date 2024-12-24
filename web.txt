@@ -1,0 +1,21 @@
+#version de node
+node -v
+
+#comando de inicio
+npm init -y
+
+#comando para instalar paquete
+npm install "nombrepaquete"
+
+#paquete express que sirve para el backend
+express
+
+#comando para instalar paquetes antes de ejecutar un proyecto
+npm install
+#node modules recibe todos los modulos de node
+
+#comando para ejecutar un proyecto
+npm run nombre_accion
+#comando para instalar dependencias solo en desarrollo
+npm installa paquete -D 
+
