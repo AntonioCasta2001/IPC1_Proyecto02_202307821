@@ -81,6 +81,10 @@ const getProducts = async()=>{
     const products=await response.json();
     return products;
 }
+const deleteProducts=async()=>{
+    var products=await getProducts();
+    delete setProducts(products);
+}
 const updateProducts=async()=>{
     try {
         var products=await getProducts();
@@ -114,7 +118,7 @@ const updateProducts=async()=>{
             await updateClients();
         }else{
             await Swal.fire({
-                title:'<span style="color:#A0A4B4;">Nuevo producto</span>',
+                title:'<span style="color:#A0A4B4;">Nuevo cliente</span>',
                 html:'<span style="color:#A0A4B4;">Error al crear cliente</span>',
                 icon:"error",
                 confirmButtonText:"Cerrar",
@@ -161,17 +165,21 @@ const updateProducts=async()=>{
             }
             // Actualizamos la información de mi gráfica de barras
             setBarChartData(barData);
-
+        }
+    },
+    [products]);
+    useEffect(()=>{
+        if(clients.length>0){
             // Gráfica de pie
             // Cantidad de productos con precio mayor a 100
-            const higherPriceCount = products.filter((cliente)=> cliente.edad>18).length;
+            const Mayores = clients.filter((cliente)=> cliente.edad>18).length;
             // Cantidad de productos con precio menor o igual a 100
-            const lowPriceCount=products.length-higherPriceCount;
+            const Menores=clients.length-Mayores;
             const pieData={
                 labels:['Mayores de edad', 'Menores de edad'],
                 datasets:[
                     {
-                        data:[higherPriceCount,lowPriceCount],
+                        data:[Mayores,Menores],
                         backgroundColor:['rgba(255,99,132,0.6)','rgba(24, 147, 219, 0.6)'],
                     }
                 ]
@@ -179,7 +187,7 @@ const updateProducts=async()=>{
             setPieChartData(pieData);
         }
     },
-    [products]);
+    [clients]);
     return(
         <>
         <div>
@@ -222,12 +230,12 @@ const updateProducts=async()=>{
                                 <td>{product.nombre_producto}</td>
                                 <td>{product.precio_producto}</td>
                                 <td>{product.stock_producto}</td>
-                                //<button onClick>Eliminar</button>
+                                //<button onClick={deleteProducts}>Eliminar</button>
                             </tr>
                         ))
                     ):(
                         <tr>
-                            <td colSpan="5">No hay productos registrados</td>
+                            <td colSpan="4">No hay productos registrados</td>
                         </tr>
                     )}
                 </tbody>
@@ -265,7 +273,7 @@ const updateProducts=async()=>{
                 <div style={{width:'70%', margin:'auto'}}>
                     {barChartData? <Bar data={barChartData}/>:<p>Cargando gráfica......</p>}
                 </div>
-                <h1>Grafica de edades&gt; 100 vs precio&lt;=100</h1>
+                <h1>Grafica de edades&gt; 18 vs edad&lt;=18</h1>
                 <div style={{width:'70%', margin:'auto'}}>
                     {pieChartData? <Pie data={pieChartData}/>:<p>Cargando gráfica......</p>}
                 </div>

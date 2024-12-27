@@ -55,6 +55,9 @@ module.exports.allProducts=async(req,res)=>{
     }
 }
 
+//controlador administrar el login
+// en js "2"==2 => sera verdadero(true)
+// "2"===2 => false
 module.exports.newClientes=async(req,res,next)=>{
     if (req.body.id_cliente && req.body.nombre && req.body.apellido && req.body.nit && req.body.nit !== undefined && req.body.edad) {
             try {
@@ -77,19 +80,16 @@ module.exports.newClientes=async(req,res,next)=>{
         })
     }
 }
+
 module.exports.allclientes=async(req,res)=>{
     try {
-        res.status(200).json(products);
+        res.status(200).json(clientes);
     } catch (error) {
         res.status(400).json({
             error:error.message,
         })
     }
 }
-//controlador administrar el login
-// en js "2"==2 => sera verdadero(true)
-// "2"===2 => false
-
 module.exports.login=async(req,res)=>{
     try {
         if(req.body.username===adminData.username && req.body.password===adminData.password){

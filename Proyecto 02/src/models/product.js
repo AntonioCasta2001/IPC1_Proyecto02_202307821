@@ -1,5 +1,5 @@
 const products=[];
-const clientes=[];
+let clientes=[];
 module.exports=products;
 module.exports=clientes;
 
