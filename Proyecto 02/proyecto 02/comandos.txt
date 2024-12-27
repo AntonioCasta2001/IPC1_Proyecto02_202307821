@@ -1,0 +1,2 @@
+// crear proyecto en react
+npm create vite@latest nombre-proyecto --template react

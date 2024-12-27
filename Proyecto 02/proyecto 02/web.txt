@@ -1,0 +1,16 @@
+/*numero=5;
+numero=8;
+numero="hola";
+let numero=8;
+//let variable local o tempora
+//var variable global
+//las rutas son definciones para accer a partes del backend
+uedi (loggear)
+{
+    edad:23,
+    nombre:"David",
+}
+
+postman: es una simulacion de usuario, algo que pasa en muchas paginas hoy en dia
+
+//para evaluar en postman, debemos hacer npm run "proyecto", antes de probar el host
