@@ -22,7 +22,7 @@ const Dashboard=()=>{
     const [ClienteBody, setClienteBody]=useState('');//contenido del nuevo cliente
     //UseState para administrar los productos que obtengamos de nuestro backend
     const[products,setProducts]=useState([]);
-    const[clients,setclients]=useState([]);
+    const[clientes,setclients]=useState([]);
     // Datos de mi gráfica de barras de productos por precio
     const[barChartData,setBarChartData]=useState(null);
     // Datos de mi gráfica de pie (Productos con precio mayor a 100 vs productos con precio menor/igual a 100)
@@ -153,13 +153,14 @@ const updateProducts=async()=>{
     useEffect(()=>{
         if(products.length>0){
             // Gráfica de barras
-            const sortedProducts= [...products].sort((a,b)=>a.precio-b.precio);
+            const sortedProducts= [...products].sort((a,b)=>a.precio_producto-b.precio_producto);
             const barData={
                 labels: sortedProducts.map((product)=>product.nombre_producto),
                 datasets:[
                     {
                         label:'Precio',
-                        data:sortedProducts.map((product)=>product.precio),
+                        data:sortedProducts.map((product)=>product.precio_producto),
+                        backgroundColor:['rgba(10, 255, 0)'],
                     }
                 ]
             }
@@ -169,30 +170,30 @@ const updateProducts=async()=>{
     },
     [products]);
     useEffect(()=>{
-        if(clients.length>0){
+        if(clientes.length>0){
             // Gráfica de pie
             // Cantidad de productos con precio mayor a 100
-            const Mayores = clients.filter((cliente)=> cliente.edad>18).length;
+            const Mayores = clientes.filter((cliente)=> cliente.edad>18).length;
             // Cantidad de productos con precio menor o igual a 100
-            const Menores=clients.length-Mayores;
+            const Menores=clientes.length-Mayores;
             const pieData={
                 labels:['Mayores de edad', 'Menores de edad'],
                 datasets:[
                     {
                         data:[Mayores,Menores],
-                        backgroundColor:['rgba(255,99,132,0.6)','rgba(24, 147, 219, 0.6)'],
+                        backgroundColor:['rgba(192, 192, 192)','rgba(139, 0, 0)'],
                     }
                 ]
             };
             setPieChartData(pieData);
         }
     },
-    [clients]);
+    [clientes]);
     return(
         <>
         <div>
             <h2>Cobra Kai Dashboard</h2>
-            <textarea
+            <textarea 
                 rows="10"
                 cols="50"
                 placeholder='crea un nuevo producto aqui..'
@@ -207,8 +208,8 @@ const updateProducts=async()=>{
                 onChange={handleChange2}
             />
             <br/>
-            <button onClick={handleSubmit}>Enviar</button>
-            <button onClick={handleSubmit2}>Enviar</button>
+            <button className="productos_container" onClick={handleSubmit}>Enviar</button>
+            <button className="clientes_container"onClick={handleSubmit2}>Enviar</button>
         </div>
         <h1>Productos registrados en el Sistema</h1>
         <div className="table-container">
@@ -252,8 +253,8 @@ const updateProducts=async()=>{
                     </tr>
                 </thead>
                 <tbody>{/*recorremos los productos*/}
-                    {clients.length>0?(
-                        clients.map((cliente)=>(
+                    {clientes.length>0?(
+                        clientes.map((cliente)=>(
                             <tr ley={cliente.id_cliente}>
                                 <td>{cliente.id_cliente}</td>
                                 <td>{cliente.nombre}</td>

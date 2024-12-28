@@ -59,10 +59,10 @@ module.exports.allProducts=async(req,res)=>{
 // en js "2"==2 => sera verdadero(true)
 // "2"===2 => false
 module.exports.newClientes=async(req,res,next)=>{
-    if (req.body.id_cliente && req.body.nombre && req.body.apellido && req.body.nit && req.body.nit !== undefined && req.body.edad) {
+    if (req.body.id_cliente && req.body.nombre && req.body.apellido && req.body.nit && req.body.nit !== undefined && req.body.nit!=0 && req.body.edad) {
             try {
                 //obtenemos los datos del producto
-                const newClientes=req.body;
+                let newClientes=req.body;
                 clientes.push(newClientes);
                 res.status(200).json({
                     message:"Cliente creado con exito",
@@ -76,7 +76,8 @@ module.exports.newClientes=async(req,res,next)=>{
             }
     } else{
         res.status(400).json({
-            message: "el nit no puede estar vacio"
+            message: "el nit no puede estar vacio",
+            status:"error"
         })
     }
 }
