@@ -208,8 +208,8 @@ const updateProducts=async()=>{
                 onChange={handleChange2}
             />
             <br/>
-            <button className="productos_container" onClick={handleSubmit}>Enviar</button>
-            <button className="clientes_container"onClick={handleSubmit2}>Enviar</button>
+            <button  onClick={handleSubmit}>Enviar</button>            
+            <button onClick={handleSubmit2}>Enviar</button>
         </div>
         <h1>Productos registrados en el Sistema</h1>
         <div className="table-container">

@@ -1,5 +1,5 @@
 const products=require('../models/product');
-const clientes=require('../models/product');
+let clientes=require('../models/clientes');
 //instalar admindata
 const {adminData}=require("../config/config");
 //controlador par manejar la creacion de un nuevo producto
@@ -54,7 +54,6 @@ module.exports.allProducts=async(req,res)=>{
         })
     }
 }
-
 //controlador administrar el login
 // en js "2"==2 => sera verdadero(true)
 // "2"===2 => false
@@ -64,7 +63,7 @@ module.exports.newClientes=async(req,res,next)=>{
                 //obtenemos los datos del producto
                 let newClientes=req.body;
                 clientes.push(newClientes);
-                res.status(200).json({
+                res.status(220).json({
                     message:"Cliente creado con exito",
                     status:"success"
                 })
@@ -84,7 +83,7 @@ module.exports.newClientes=async(req,res,next)=>{
 
 module.exports.allclientes=async(req,res)=>{
     try {
-        res.status(200).json(clientes);
+        res.status(220).json(clientes);
     } catch (error) {
         res.status(400).json({
             error:error.message,
